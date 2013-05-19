@@ -1,5 +1,6 @@
 package com.tipyx.games.mteproject;
 
+import com.tipyx.games.mteproject.screen.Game;
 import nme.display.Sprite;
 import nme.events.Event;
 import nme.Lib;
@@ -27,6 +28,9 @@ class Main extends Sprite
 		inited = true;
 
 		// (your code here)
+		
+		var g:Game = new Game();
+		addChild(g);
 		
 		// Stage:
 		// stage.stageWidth x stage.stageHeight @ stage.dpiScale
