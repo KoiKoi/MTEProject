@@ -12,6 +12,7 @@ class Input
 {
 	public var left:Bool = false;
 	public var right:Bool = false;
+	public var space:Bool = false;
 
 	public function new() 
 	{
@@ -22,10 +23,12 @@ class Input
 	private function onKeyDown(e:KeyboardEvent):Void {
 		if (e.keyCode == Keyboard.LEFT) left = true;
 		if (e.keyCode == Keyboard.RIGHT) right = true;
+		if (e.keyCode == Keyboard.SPACE) space = true;
 	}
 	
 	private function onKeyUp(e:KeyboardEvent):Void {
 		if (e.keyCode == Keyboard.LEFT) left = false;
 		if (e.keyCode == Keyboard.RIGHT) right = false;
+		if (e.keyCode == Keyboard.SPACE) space = false;
 	}
 }

@@ -37,14 +37,15 @@ class Hero extends Sprite
 				//
 		//}
 		
-		arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 16, 57, -2, -57));
+		arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 16, 57, -3, -57));
+		arSpritesheetFrame.push(new SpritesheetFrame(43, 7, 16, 57, -3, -57));
 		
 		spritesheet = new Spritesheet(Assets.getBitmapData ("img/hero.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
-		anim.showBehavior("normal");
+		anim.spritesheet.addBehavior(new BehaviorData("hidden", [1], true, 2));
 		addChild(anim);
-		
+		showHidden();
 		//anim.update(10);
 		
 		previousTime = Lib.getTimer ();
@@ -61,6 +62,14 @@ class Hero extends Sprite
 		
 		previousTime = currentTime;
 		
+	}
+	
+	public function showHidden():Void {
+		anim.showBehavior("hidden");
+	}
+	
+	public function showNormal():Void {
+		anim.showBehavior("normal");
 	}
 	
 }

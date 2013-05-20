@@ -11,7 +11,7 @@
     <movie version="3" />
     <movie minorVersion="0" />
     <movie platform="NME" />
-    <movie background="FFFFFF" />
+    <movie background="9BBC0F" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -40,6 +40,16 @@
     <asset path="assets\img\tileGround.png" bitmap="False" update="..\Pyxel_raw\export\tileGround.png" />
     <asset path="assets\img\hero.png" bitmap="False" update="..\Pyxel_raw\export\hero.png" />
     <asset path="assets\img\hero.png" bitmap="False" />
+    <asset path="assets\img\tileGround.png" bitmap="False" />
+    <asset path="assets\img\tileGround.png" bitmap="False" />
+    <asset path="assets\img\hero.png" bitmap="False" />
+    <asset path="assets\img\skill_icon.png" bitmap="False" update="..\Pyxel_raw\export\skill_icon.png" />
+    <asset path="assets\img\bg_skillSelect.png" bitmap="False" update="..\Pyxel_raw\export\bg_skillSelect.png" />
+    <asset path="assets\img\skill_icon.png" bitmap="False" />
+    <asset path="assets\img\skill_icon.png" bitmap="False" />
+    <asset path="assets\img\skill_icon.png" bitmap="False" />
+    <asset path="assets\img\tileGround2.png" bitmap="False" update="..\Pyxel_raw\export\tileGround2.png" />
+    <asset path="assets\img\btn_IG.png" bitmap="False" />
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
