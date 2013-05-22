@@ -36,12 +36,6 @@ class Main extends Sprite
 
 		// (your code here)
 		
-		
-		// Stage:
-		// stage.stageWidth x stage.stageHeight @ stage.dpiScale
-		
-		// Assets:
-		// nme.Assets.getBitmapData("img/assetname.jpg");
 		blackScreenFade = new FadeBlackScreen();
 		
 		var maskObject:Sprite = new Sprite();
@@ -58,13 +52,11 @@ class Main extends Sprite
 	public function changeScreen(newScreen:String):Void {
 		addChild(blackScreenFade);
 		Actuate.tween(blackScreenFade, 0.5, { alpha : 1 }).onComplete(removeBlackScreen, [newScreen]);
-		//.to(blackScreenFade, 0.25, { alpha : 1, onComplete: removeBlackScreen, onCompleteParams: [newScreen] } );
 	}
 	
 	private function removeBlackScreen(newScreen:String):Void { 
 		changePage(newScreen);
 		Actuate.tween(blackScreenFade, 0.5, { alpha : 0 }).onComplete(endAnim);
-		//TweenMax.to(blackScreenFade, 0.25, { alpha : 0, onComplete: endAnim} );
 	}
 	
 	private function endAnim():Void {
@@ -105,16 +97,6 @@ class Main extends Sprite
 	{
 		changeScreen("game");	
 	}
-	
-	//
-	//private function gotoHomePage() 
-	//{
-		//var home:Home = new Home();
-		//home.addEventListener("playButtonClicked", gotoGamePage);
-		//home.addEventListener("continueButtonClicked", gotoGamePage);
-		//home.addEventListener("optionsButtonClicked", gotoGamePage);
-		//addChild(home);		
-	//}
 
 	/* SETUP */
 

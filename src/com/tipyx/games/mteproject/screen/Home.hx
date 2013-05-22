@@ -19,20 +19,20 @@ class Home extends Sprite
 		
 		var playButton:BtnHome = new BtnHome(0);
 		playButton.name = "playButton";
-		playButton.x = 325;
-		playButton.y = 100;
+		playButton.x = 400;
+		playButton.y = 150;
 		playButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
 		var continueButton:BtnHome = new BtnHome(1);
 		continueButton.name = "continueButton";
-		continueButton.x = 325;
-		continueButton.y = 200;
+		continueButton.x = 400;
+		continueButton.y = 250;
 		continueButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
 		var optionsButton:BtnHome = new BtnHome(2);
 		optionsButton.name = "optionsButton";
-		optionsButton.x = 325;
-		optionsButton.y = 300;
+		optionsButton.x = 400;
+		optionsButton.y = 350;
 		optionsButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
 		addChild(playButton);
