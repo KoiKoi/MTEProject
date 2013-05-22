@@ -4,6 +4,7 @@ import com.eclecticdesignstudio.spritesheet.AnimatedSprite;
 import com.eclecticdesignstudio.spritesheet.data.BehaviorData;
 import com.eclecticdesignstudio.spritesheet.data.SpritesheetFrame;
 import com.eclecticdesignstudio.spritesheet.Spritesheet;
+import nme.display.Shape;
 import nme.display.Sprite;
 import nme.Assets;
 import nme.events.Event;
@@ -16,8 +17,17 @@ import nme.Lib;
 class Hero extends Sprite
 {
 	private var previousTime:Int;
+	
 	private var anim:AnimatedSprite;
 	private var spritesheet:Spritesheet;
+	private var collideBox:Shape;
+	
+	/*
+	 * Skill Type :
+	 * 0 : Jump
+	 * 1 : Left
+	 * 2 : Right
+	 */
 
 	public function new() 
 	{
@@ -37,8 +47,8 @@ class Hero extends Sprite
 				//
 		//}
 		
-		arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 16, 57, -3, -57));
-		arSpritesheetFrame.push(new SpritesheetFrame(43, 7, 16, 57, -3, -57));
+		arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 14, 57, 0, -57));
+		arSpritesheetFrame.push(new SpritesheetFrame(43, 7, 14, 57, 0, -57));
 		
 		spritesheet = new Spritesheet(Assets.getBitmapData ("img/hero.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
@@ -46,14 +56,16 @@ class Hero extends Sprite
 		anim.spritesheet.addBehavior(new BehaviorData("hidden", [1], true, 2));
 		addChild(anim);
 		showHidden();
-		//anim.update(10);
 		
-		previousTime = Lib.getTimer ();
-		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
+		collideBox = new Shape();
+		collideBox.graphics.beginFill(0xFFFFFF);
+		collideBox.graphics.drawRect(0, -57, 14, 57);
+		collideBox.alpha = 0;
+		addChild(collideBox);
 		
 	}
 	
-	private function this_onEnterFrame (event:Event):Void {
+	public function update():Void {
 		
 		var currentTime = Lib.getTimer ();
 		var deltaTime:Int = currentTime - previousTime;
@@ -61,7 +73,6 @@ class Hero extends Sprite
 		anim.update(deltaTime);
 		
 		previousTime = currentTime;
-		
 	}
 	
 	public function showHidden():Void {
