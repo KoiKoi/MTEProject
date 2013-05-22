@@ -90,54 +90,7 @@ class Game extends Sprite
 	private function update(e:Event):Void {
 		// Movement
 		
-		//Lib.trace(speedJump);
-		//if (speedJump >= 0 && !checkCollisionUnder()) {
-			//Lib.trace("trololo");
-			//hero.y += speedJump;
-			//if (speedJump < Settings.SPEED_JUMP_MAX) {
-				//if (speedJump < 0) speedJump += 1; 
-				//else speedJump += 0.4;
-			//}
-		//}
-		//else if (speedJump < 0) {
-			//Lib.trace("trololo");
-			//if (!checkCollisionAbove()) hero.y += speedJump;
-			//else {
-				//hero.y = getTileAbove().y + getTileAbove().width + hero.height;
-				//speedJump = 0;
-			//}
-			//if (speedJump < Settings.SPEED_JUMP_MAX) {
-				//if (speedJump < 0) speedJump += 1;
-				//else speedJump += 0.4;
-			//}
-		//}
-		//else {
-			//if (getTileUnder() != null) {
-				//hero.y = getTileUnder().y;
-				//switch (getTileUnder().getSkillType()) 
-				//{
-					//case 0:
-						//goLeft = goRight = false;
-						//speedJump = -15;
-						//jumpEnable = false;
-						//
-					//case 1:
-						//goRight = false;
-						//goLeft = true;
-					//
-					//case 2:
-						//goLeft = false;
-						//goRight = true;
-						//
-					//default:
-						//jumpEnable = true;
-						//speedJump = 0.5;
-				//}
-			//}
-		//}
-		
 		if (speedJump >= 0) {
-			Lib.trace("trololo");
 			if (getTileUnder() != null) {
 				hero.y = getTileUnder().y;
 				switch (getTileUnder().getSkillType()) 
@@ -163,16 +116,11 @@ class Game extends Sprite
 			else hero.y += speedJump;
 		}
 		else {
-			Lib.trace("trolola");
 			if (getTileAbove() == null) hero.y += speedJump;
 			else {
 				hero.y = getTileAbove().y + getTileAbove().height + hero.height;
 				speedJump = 0;
 			}
-			//if (speedJump < Settings.SPEED_JUMP_MAX) {
-				//if (speedJump < 0) speedJump += 1;
-				//else speedJump += 0.4;
-			//}
 		}
 		
 		
@@ -200,42 +148,6 @@ class Game extends Sprite
 		for (tile in arTiles) tile.update();
 		hero.update();
 	}
-	
-	//private function getTileUnder():TileNormal {
-		//for (tile in arTiles) {
-			//for (i in 0...Std.int(hero.width)) {
-				//if (hero.x + i >= tile.x && hero.x + i <= tile.x + tile.width && hero.y <= tile.y) return tile;				
-			//}
-		//}
-		//return null;
-	//}
-	
-	//private function getTileAbove():TileNormal {
-		//for (tile in arTiles) {
-			//for (i in 0...Std.int(hero.width)) {
-				//if (hero.x + i >= tile.x && hero.x + i <= tile.x + tile.width && hero.y >= tile.y + tile.height) return tile;				
-			//}
-		//}
-		//return null;
-	//}
-	
-	//private function getTileRight():TileNormal {
-		//for (tile in arTiles) {
-			//for (i in 0...Std.int(hero.height)) {
-				//if (hero.y - i >= tile.y && hero.y - i <= tile.y + tile.height && hero.x + hero.width + Settings.SPEED_X_MAX > tile.x && hero.x + hero.width + Settings.SPEED_X_MAX < tile.x + tile.width) return tile;
-			//}
-		//}
-		//return null;
-	//}
-	//
-	//private function getTileLeft():TileNormal {
-		//for (tile in arTiles) {
-			//for (i in 0...Std.int(hero.height)) {
-				//if (hero.y - i >= tile.y && hero.y - i <= tile.y + tile.height && hero.x >= tile.x + tile.width) return tile;
-			//}
-		//}
-		//return null;
-	//}
 	
 	private function getTileUnder():TileNormal {
 		for (tile in arTiles) {

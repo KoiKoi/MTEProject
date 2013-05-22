@@ -1,5 +1,6 @@
 -main ApplicationMain 
 -lib nme
+-lib actuate
 -cp src
 -cp C:\Development\Haxe\haxe\lib\nme/3,5,6/
 -D nme

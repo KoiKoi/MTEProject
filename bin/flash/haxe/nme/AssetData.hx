@@ -20,6 +20,8 @@ class AssetData {
 			
 			className.set ("img/bg_skillSelect.png", nme.NME_img_bg_skillselect_png);
 			type.set ("img/bg_skillSelect.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/btn_home.png", nme.NME_img_btn_home_png);
+			type.set ("img/btn_home.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/btn_IG.png", nme.NME_img_btn_ig_png);
 			type.set ("img/btn_IG.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/hero.png", nme.NME_img_hero_png);
@@ -43,6 +45,7 @@ class AssetData {
 
 
 class NME_img_bg_skillselect_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_btn_home_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_btn_ig_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_hero_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_skill_icon_png extends nme.display.BitmapData { public function new () { super (0, 0); } }

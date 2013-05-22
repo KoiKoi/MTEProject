@@ -12,6 +12,7 @@
     <movie minorVersion="0" />
     <movie platform="NME" />
     <movie background="9BBC0F" />
+    <movie preferredSDK="Haxe 3.0.0;3.0.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -30,6 +31,7 @@
   <!-- haxelib libraries -->
   <haxelib>
     <library name="nme" />
+    <library name="actuate" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
@@ -50,6 +52,7 @@
     <asset path="assets\img\skill_icon.png" bitmap="False" />
     <asset path="assets\img\tileGround2.png" bitmap="False" update="..\Pyxel_raw\export\tileGround2.png" />
     <asset path="assets\img\btn_IG.png" bitmap="False" />
+    <asset path="assets\img\btn_home.png" bitmap="False" update="..\Pyxel_raw\export\btn_home.png" />
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
