@@ -90,28 +90,54 @@ class Game extends Sprite
 	private function update(e:Event):Void {
 		// Movement
 		
-		Lib.trace(speedJump);
-		if (speedJump >= 0 && !checkCollisionUnder()) {
+		//Lib.trace(speedJump);
+		//if (speedJump >= 0 && !checkCollisionUnder()) {
 			//Lib.trace("trololo");
-			hero.y += speedJump;
-			if (speedJump < Settings.SPEED_JUMP_MAX) {
-				if (speedJump < 0) speedJump += 1; 
-				else speedJump += 0.4;
-			}
-		}
-		else if (speedJump < 0) {
+			//hero.y += speedJump;
+			//if (speedJump < Settings.SPEED_JUMP_MAX) {
+				//if (speedJump < 0) speedJump += 1; 
+				//else speedJump += 0.4;
+			//}
+		//}
+		//else if (speedJump < 0) {
 			//Lib.trace("trololo");
-			if (!checkCollisionAbove()) hero.y += speedJump;
-			else {
-				hero.y = getTileAbove().y + getTileAbove().width + hero.height;
-				speedJump = 0;
-			}
-			if (speedJump < Settings.SPEED_JUMP_MAX) {
-				if (speedJump < 0) speedJump += 1;
-				else speedJump += 0.4;
-			}
-		}
-		else {
+			//if (!checkCollisionAbove()) hero.y += speedJump;
+			//else {
+				//hero.y = getTileAbove().y + getTileAbove().width + hero.height;
+				//speedJump = 0;
+			//}
+			//if (speedJump < Settings.SPEED_JUMP_MAX) {
+				//if (speedJump < 0) speedJump += 1;
+				//else speedJump += 0.4;
+			//}
+		//}
+		//else {
+			//if (getTileUnder() != null) {
+				//hero.y = getTileUnder().y;
+				//switch (getTileUnder().getSkillType()) 
+				//{
+					//case 0:
+						//goLeft = goRight = false;
+						//speedJump = -15;
+						//jumpEnable = false;
+						//
+					//case 1:
+						//goRight = false;
+						//goLeft = true;
+					//
+					//case 2:
+						//goLeft = false;
+						//goRight = true;
+						//
+					//default:
+						//jumpEnable = true;
+						//speedJump = 0.5;
+				//}
+			//}
+		//}
+		
+		if (speedJump >= 0) {
+			Lib.trace("trololo");
 			if (getTileUnder() != null) {
 				hero.y = getTileUnder().y;
 				switch (getTileUnder().getSkillType()) 
@@ -131,18 +157,37 @@ class Game extends Sprite
 						
 					default:
 						jumpEnable = true;
-						speedJump = 0.5;
+						speedJump = 0;
 				}
 			}
+			else hero.y += speedJump;
+		}
+		else {
+			Lib.trace("trolola");
+			if (getTileAbove() == null) hero.y += speedJump;
+			else {
+				hero.y = getTileAbove().y + getTileAbove().height + hero.height;
+				speedJump = 0;
+			}
+			//if (speedJump < Settings.SPEED_JUMP_MAX) {
+				//if (speedJump < 0) speedJump += 1;
+				//else speedJump += 0.4;
+			//}
+		}
+		
+		
+		if (speedJump < Settings.SPEED_JUMP_MAX) {
+			if (speedJump < 0) speedJump += 1;
+			else speedJump += 0.4;
 		}
 		
 		if (goLeft || input.left) {
-			if (checkCollisionLeft() == null) hero.x -= Settings.SPEED_X_MAX;
-			else hero.x = checkCollisionLeft().x + checkCollisionLeft().width;
+			if (getTileLeft() == null) hero.x -= Settings.SPEED_X_MAX;
+			else hero.x = getTileLeft().x + getTileLeft().width+1;
 		}
 		else if (goRight || input.right) {
-			if (checkCollisionRight() == null) hero.x += Settings.SPEED_X_MAX;
-			else hero.x = checkCollisionRight().x - hero.width;
+			if (getTileRight() == null) hero.x += Settings.SPEED_X_MAX;
+			else hero.x = getTileRight().x - hero.width;
 		}
 		
 		if (input.space && jumpEnable) {
@@ -156,23 +201,23 @@ class Game extends Sprite
 		hero.update();
 	}
 	
-	private function getTileUnder():TileNormal {
-		for (tile in arTiles) {
-			for (i in 0...Std.int(hero.width)) {
-				if (hero.x + i >= tile.x && hero.x + i <= tile.x + tile.width && hero.y <= tile.y) return tile;				
-			}
-		}
-		return null;
-	}
+	//private function getTileUnder():TileNormal {
+		//for (tile in arTiles) {
+			//for (i in 0...Std.int(hero.width)) {
+				//if (hero.x + i >= tile.x && hero.x + i <= tile.x + tile.width && hero.y <= tile.y) return tile;				
+			//}
+		//}
+		//return null;
+	//}
 	
-	private function getTileAbove():TileNormal {
-		for (tile in arTiles) {
-			for (i in 0...Std.int(hero.width)) {
-				if (hero.x + i >= tile.x && hero.x + i <= tile.x + tile.width && hero.y >= tile.y + tile.height) return tile;				
-			}
-		}
-		return null;
-	}
+	//private function getTileAbove():TileNormal {
+		//for (tile in arTiles) {
+			//for (i in 0...Std.int(hero.width)) {
+				//if (hero.x + i >= tile.x && hero.x + i <= tile.x + tile.width && hero.y >= tile.y + tile.height) return tile;				
+			//}
+		//}
+		//return null;
+	//}
 	
 	//private function getTileRight():TileNormal {
 		//for (tile in arTiles) {
@@ -192,28 +237,28 @@ class Game extends Sprite
 		//return null;
 	//}
 	
-	private function checkCollisionUnder():Bool {
+	private function getTileUnder():TileNormal {
 		for (tile in arTiles) {
-			if (tile.collideY(hero.x, hero.y + speedJump, hero.width)) return true;
+			if (tile.collideY(hero.x, hero.y + speedJump, hero.width)) return tile;
 		}
-		return false;
+		return null;
 	}
 	
-	private function checkCollisionAbove():Bool {
+	private function getTileAbove():TileNormal {
 		for (tile in arTiles) {
-			if (tile.collideY(hero.x, hero.y + speedJump - hero.height, hero.width)) return true;
+			if (tile.collideY(hero.x, hero.y + speedJump - hero.height, hero.width)) return tile;
 		}
-		return false;
+		return null;
 	}
 	
-	private function checkCollisionRight():TileNormal {
+	private function getTileRight():TileNormal {
 		for (tile in arTiles) {
 			if (tile.collideX(hero.x + hero.width + Settings.SPEED_X_MAX, hero.y, hero.height)) return tile;
 		}
 		return null;
 	}
 	
-	private function checkCollisionLeft():TileNormal {
+	private function getTileLeft():TileNormal {
 		for (tile in arTiles) {
 			if (tile.collideX(hero.x - Settings.SPEED_X_MAX, hero.y, hero.height)) return tile;
 		}
