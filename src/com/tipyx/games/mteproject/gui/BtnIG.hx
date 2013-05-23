@@ -31,7 +31,8 @@ class BtnIG extends Sprite
 		
 		//arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 16, 57, -2, -57));
 		
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_IG.png"), arSpritesheetFrame);
+		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_IG.png"), arSpritesheetFrame);
+		spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_IGV2.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
 		anim.showBehavior("normal");

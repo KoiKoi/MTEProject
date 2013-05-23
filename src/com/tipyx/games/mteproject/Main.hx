@@ -49,13 +49,13 @@ class Main extends Sprite
 		changeScreen("home");
 	}
 		
-	public function changeScreen(newScreen:String):Void {
+	public function changeScreen(_newScreen:String, _level:Int = 1):Void {
 		addChild(blackScreenFade);
-		Actuate.tween(blackScreenFade, 0.5, { alpha : 1 }).onComplete(removeBlackScreen, [newScreen]);
+		Actuate.tween(blackScreenFade, 0.5, { alpha : 1 }).onComplete(removeBlackScreen, [_newScreen, _level]);
 	}
 	
-	private function removeBlackScreen(newScreen:String):Void { 
-		changePage(newScreen);
+	private function removeBlackScreen(_newScreen:String, _level:Int):Void { 
+		changePage(_newScreen, _level);
 		Actuate.tween(blackScreenFade, 0.5, { alpha : 0 }).onComplete(endAnim);
 	}
 	
@@ -63,7 +63,7 @@ class Main extends Sprite
 		removeChild(blackScreenFade);
 	}
 	
-	private function changePage(newScreen:String):Void {
+	private function changePage(newScreen:String, _level:Int):Void {
 		// Remove old Screen
 		if (home != null) {
 			home.removeEventListener("playButtonClicked", gotoGamePage);
@@ -86,7 +86,7 @@ class Main extends Sprite
 			addChild(home);
 		}
 		else if (newScreen == "game") {
-			game = new Game();
+			game = new Game(_level);
 			addChild(game);
 		}
 		

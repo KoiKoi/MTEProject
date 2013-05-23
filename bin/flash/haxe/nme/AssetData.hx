@@ -20,18 +20,32 @@ class AssetData {
 			
 			className.set ("img/bg_skillSelect.png", nme.NME_img_bg_skillselect_png);
 			type.set ("img/bg_skillSelect.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/bg_skillSelectV2.png", nme.NME_img_bg_skillselectv2_png);
+			type.set ("img/bg_skillSelectV2.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/btn_home.png", nme.NME_img_btn_home_png);
 			type.set ("img/btn_home.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/btn_homeV2.png", nme.NME_img_btn_homev2_png);
+			type.set ("img/btn_homeV2.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/btn_IG.png", nme.NME_img_btn_ig_png);
 			type.set ("img/btn_IG.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/btn_IGV2.png", nme.NME_img_btn_igv2_png);
+			type.set ("img/btn_IGV2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/clickContinueButton.png", nme.NME_img_clickcontinuebutton_png);
+			type.set ("img/clickContinueButton.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/hero.png", nme.NME_img_hero_png);
 			type.set ("img/hero.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/heroV2.png", nme.NME_img_herov2_png);
+			type.set ("img/heroV2.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/skill_icon.png", nme.NME_img_skill_icon_png);
 			type.set ("img/skill_icon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/skill_iconV2.png", nme.NME_img_skill_iconv2_png);
+			type.set ("img/skill_iconV2.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/tileGround.png", nme.NME_img_tileground_png);
 			type.set ("img/tileGround.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			className.set ("img/tileGround2.png", nme.NME_img_tileground2_png);
-			type.set ("img/tileGround2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/tileGroundV2.png", nme.NME_img_tilegroundv2_png);
+			type.set ("img/tileGroundV2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/tutoMessage.png", nme.NME_img_tutomessage_png);
+			type.set ("img/tutoMessage.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			
 			
 			initialized = true;
@@ -45,9 +59,16 @@ class AssetData {
 
 
 class NME_img_bg_skillselect_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_bg_skillselectv2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_btn_home_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_btn_homev2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_btn_ig_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_btn_igv2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_clickcontinuebutton_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_hero_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_herov2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_skill_icon_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_skill_iconv2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_tileground_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_img_tileground2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_tilegroundv2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_tutomessage_png extends nme.display.BitmapData { public function new () { super (0, 0); } }

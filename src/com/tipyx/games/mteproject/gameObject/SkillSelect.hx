@@ -1,5 +1,6 @@
 package com.tipyx.games.mteproject.gameObject;
 
+import com.tipyx.games.mteproject.ConfigLevels;
 import com.tipyx.games.mteproject.gui.BtnIG;
 import nme.display.Bitmap;
 import nme.display.BitmapData;
@@ -15,55 +16,64 @@ import nme.events.MouseEvent;
  */
 class SkillSelect extends Sprite
 {
-	private var arSkill:Array<SkillIcon>;
 	private var selectedSkill:SkillIcon;
+	private var playButton:BtnIG;
+	private var stopButton:BtnIG;
 	
-	public function new() 
+	private var arSkill:Array<SkillIcon>;
+	private var level:Int;
+	
+	public function new(_level:Int) 
 	{
 		super();
 		
+		this.level = _level;
+		
 		arSkill = [];
 		
-		var bitmapData:BitmapData = Assets.getBitmapData("img/bg_skillSelect.png");
+		//var bitmapData:BitmapData = Assets.getBitmapData("img/bg_skillSelect.png");
+		var bitmapData:BitmapData = Assets.getBitmapData("img/bg_skillSelectV2.png");
 		var bitmap:Bitmap = new Bitmap(bitmapData);
 		
 		addChild(bitmap);
 		
-		for (i in 0...5) {
-			var skill:SkillIcon = new SkillIcon(i);
-			skill.x = 100 + (i * 60);
-			skill.y = 7;
-			skill.addEventListener(MouseEvent.CLICK, onClickBadge);
-			arSkill.push(skill);
-			addChild(skill);
+		for (i in 0...6) {
+			if (ConfigLevels.AR_SKILLZ_ALLOWED[this.level - 1][i]) {
+				var skill:SkillIcon = new SkillIcon(i);
+				skill.x = 100 + (i * 60);
+				skill.y = 7;
+				skill.addEventListener(MouseEvent.CLICK, onClickBadge);
+				arSkill.push(skill);
+				if(this.level != 1) addChild(skill);				
+			}
 		}
 		
-		var playButton:BtnIG = new BtnIG(0);
+		playButton = new BtnIG(0);
 		playButton.name = "playButton";
 		playButton.x = 600;
 		playButton.y = 7;
 		playButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
-		var pauseButton:BtnIG = new BtnIG(1);
-		pauseButton.name = "pauseButton";
-		pauseButton.x = 660;
-		pauseButton.y = 7;
-		pauseButton.addEventListener(MouseEvent.CLICK, onClickButton);
+		//var pauseButton:BtnIG = new BtnIG(1);
+		//pauseButton.name = "pauseButton";
+		//pauseButton.x = 660;
+		//pauseButton.y = 7;
+		//pauseButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
-		var stopButton:BtnIG = new BtnIG(2);
+		stopButton = new BtnIG(2);
 		stopButton.name = "stopButton";
 		stopButton.x = 720;
 		stopButton.y = 7;
 		stopButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
-		addChild(playButton);
-		addChild(pauseButton);
-		addChild(stopButton);
+		//addChild(playButton);
+		//addChild(pauseButton);
+		//addChild(stopButton);
 	}
 	
 	private function onClickButton(e:MouseEvent):Void {
 		if (e.currentTarget.name == "playButton") dispatchEvent(new Event("playButtonClicked"));
-		else if (e.currentTarget.name == "pauseButton") dispatchEvent(new Event("pauseButtonClicked"));
+		//else if (e.currentTarget.name == "pauseButton") dispatchEvent(new Event("pauseButtonClicked"));
 		else if (e.currentTarget.name == "stopButton") dispatchEvent(new Event("stopButtonClicked"));
 	}
 	
@@ -72,6 +82,18 @@ class SkillSelect extends Sprite
 		
 		e.currentTarget.alpha = 0.5;
 		selectedSkill = e.currentTarget;
+	}
+	
+	public function showSkill():Void {
+		addChild(arSkill[0]);
+	}
+	
+	public function showPlayButton():Void {
+		addChild(playButton);
+	}
+	
+	public function showStopButton():Void {
+		addChild(stopButton);
 	}
 	
 	public function getSelectedSkill():SkillIcon {

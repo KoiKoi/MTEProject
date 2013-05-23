@@ -11,7 +11,7 @@
     <movie version="3" />
     <movie minorVersion="0" />
     <movie platform="NME" />
-    <movie background="9BBC0F" />
+    <movie background="D3DDB9" />
     <movie preferredSDK="Haxe 3.0.0;3.0.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
@@ -50,9 +50,17 @@
     <asset path="assets\img\skill_icon.png" bitmap="False" />
     <asset path="assets\img\skill_icon.png" bitmap="False" />
     <asset path="assets\img\skill_icon.png" bitmap="False" />
-    <asset path="assets\img\tileGround2.png" bitmap="False" update="..\Pyxel_raw\export\tileGround2.png" />
     <asset path="assets\img\btn_IG.png" bitmap="False" />
     <asset path="assets\img\btn_home.png" bitmap="False" update="..\Pyxel_raw\export\btn_home.png" />
+    <asset path="assets\img\tileGroundV2.png" bitmap="False" />
+    <asset path="assets\img\bg_skillSelectV2.png" bitmap="False" />
+    <asset path="assets\img\btn_homeV2.png" bitmap="False" update="..\Pyxel_raw\export\btn_homeV2.png" />
+    <asset path="assets\img\btn_IGV2.png" bitmap="False" update="..\Pyxel_raw\export\btn_IGV2.png" />
+    <asset path="assets\img\heroV2.png" bitmap="False" update="..\Pyxel_raw\export\heroV2.png" />
+    <asset path="assets\img\skill_iconV2.png" bitmap="False" update="..\Pyxel_raw\export\skill_iconV2.png" />
+    <asset path="assets\img\btn_IGV2.png" bitmap="False" />
+    <asset path="assets\img\tutoMessage.png" bitmap="False" update="..\Assets\tuto.png" />
+    <asset path="assets\img\clickContinueButton.png" bitmap="False" update="..\Assets\clickContinueButton.png" />
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

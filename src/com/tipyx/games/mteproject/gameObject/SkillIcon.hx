@@ -31,7 +31,8 @@ class SkillIcon extends Sprite
 		
 		//arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 16, 57, -2, -57));
 		
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_icon.png"), arSpritesheetFrame);
+		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_icon.png"), arSpritesheetFrame);
+		spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_iconV2.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
 		anim.showBehavior("normal");

@@ -47,7 +47,8 @@ class TileNormal extends Sprite
 				
 		}
 		
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGround.png"), arSpritesheetFrame);
+		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGround.png"), arSpritesheetFrame);
+		spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGroundV2.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0, 1, 0, 1, 0], true, 2));
 		anim.showBehavior("normal");
@@ -61,8 +62,6 @@ class TileNormal extends Sprite
 		collideBox.alpha = 0;
 		addChild(collideBox);
 		
-		this.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
-		this.addEventListener(MouseEvent.ROLL_OUT, onRollOut);
 	}
 	
 	private function onRollOver(e:MouseEvent):Void {
@@ -71,6 +70,11 @@ class TileNormal extends Sprite
 	
 	private function onRollOut(e:MouseEvent):Void {
 		collideBox.alpha = 0;
+	}
+	
+	public function enableRollOver():Void {
+		this.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
+		this.addEventListener(MouseEvent.ROLL_OUT, onRollOut);
 	}
 	
 	public function update():Void {

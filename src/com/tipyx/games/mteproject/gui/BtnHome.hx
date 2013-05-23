@@ -30,7 +30,8 @@ class BtnHome extends Sprite
 		var arSpritesheetFrame:Array<SpritesheetFrame> = [];
 		arSpritesheetFrame.push(new SpritesheetFrame(150 * type, 0, 150, 50, -75, -25));
 		
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_home.png"), arSpritesheetFrame);
+		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_home.png"), arSpritesheetFrame);
+		spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_homeV2.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
 		anim.showBehavior("normal");

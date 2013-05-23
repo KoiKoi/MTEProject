@@ -50,7 +50,8 @@ class Hero extends Sprite
 		arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 14, 57, 0, -57));
 		arSpritesheetFrame.push(new SpritesheetFrame(43, 7, 14, 57, 0, -57));
 		
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/hero.png"), arSpritesheetFrame);
+		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/hero.png"), arSpritesheetFrame);
+		spritesheet = new Spritesheet(Assets.getBitmapData ("img/heroV2.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
 		anim.spritesheet.addBehavior(new BehaviorData("hidden", [1], true, 2));

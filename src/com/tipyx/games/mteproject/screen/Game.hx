@@ -5,8 +5,10 @@ import com.tipyx.games.mteproject.ConfigLevels;
 import com.tipyx.games.mteproject.gameObject.Hero;
 import com.tipyx.games.mteproject.gameObject.SkillIcon;
 import com.tipyx.games.mteproject.gameObject.SkillSelect;
+import com.tipyx.games.mteproject.gui.Tuto;
 import com.tipyx.games.mteproject.Input;
 import com.tipyx.games.mteproject.Settings;
+import motion.Actuate;
 import nme.display.Bitmap;
 import nme.display.Shape;
 import nme.display.Sprite;
@@ -24,17 +26,21 @@ class Game extends Sprite
 {
 	private var input:Input;
 	private var hero:Hero;
+	private var skillSelection:SkillSelect;
+	
 	private var arTiles:Array<TileNormal>;
 	private var speedJump:Float = 0;
 	private var jumpEnable:Bool = false;
-	private var skillSelection:SkillSelect;
-	
 	private var goLeft:Bool = false;
 	private var goRight:Bool = false;
+	private var level:Int;
+	private var tuto:Tuto;
 
-	public function new() 
+	public function new(_level:Int) 
 	{
 		super();
+		
+		this.level = _level;
 		init();
 	}
 	
@@ -46,16 +52,25 @@ class Game extends Sprite
 		var actualBlocSelected:Int = 0;
 		for (i in 0...15) {
 			for (j in  0...25) {
-				if (ConfigLevels.AR_LEVELS_TILES[0][actualBlocSelected] != -1) {
+				if (ConfigLevels.AR_LEVELS_TILES[this.level - 1][actualBlocSelected] != -1) {
 					var tile:TileNormal = new TileNormal(ConfigLevels.AR_LEVELS_TILES[0][actualBlocSelected]);
 					arTiles.push(tile);
 					tile.x = tile.width * j;
 					tile.y = tile.width * i;
-					tile.addEventListener(MouseEvent.CLICK, onClickTile);
+					if (this.level != 1) {
+						tile.enableRollOver();
+						tile.addEventListener(MouseEvent.CLICK, onClickTile);
+					}
 					addChild(tile);
 				}
 				actualBlocSelected++;
 			}
+		}
+		
+		// If Level 1, add Tuto
+		if (this.level == 1) {
+			tuto = new Tuto();
+			addChild(tuto);			
 		}
 		
 		hero = new Hero();
@@ -64,17 +79,42 @@ class Game extends Sprite
 		hero.y = 200;
 		addChild(hero);
 		
-		skillSelection = new SkillSelect();
-		skillSelection.addEventListener("playButtonClicked", play);
-		skillSelection.addEventListener("pauseButtonClicked", pause);
+		skillSelection = new SkillSelect(this.level);
+		if (this.level == 1) {
+			skillSelection.y = -50;
+		}
+		else {
+			skillSelection.addEventListener("playButtonClicked", play);
+			skillSelection.addEventListener("pauseButtonClicked", pause);			
+		}
 		addChild(skillSelection);
 		
+		Lib.current.stage.addEventListener(MouseEvent.CLICK, onClickStage);
+	}
+	
+	private function onClickStage(e:MouseEvent = null):Void {
+		tuto.gotoNextStep();
+		if (tuto.getStep() == 3) Actuate.tween(skillSelection, 1, { y:0 } );
+		else if (tuto.getStep() == 4) {
+			for (tile in arTiles) {
+				tile.enableRollOver();
+				tile.addEventListener(MouseEvent.CLICK, onClickTile);
+			}
+			skillSelection.showSkill();
+			Lib.current.stage.removeEventListener(MouseEvent.CLICK, onClickStage);
+		}
+		else if (tuto.getStep() == 5) {
+			skillSelection.showPlayButton();
+			skillSelection.addEventListener("playButtonClicked", play);
+		}
+		else if (tuto.getStep() == 7) skillSelection.showStopButton();
 	}
 	
 	private function play(e:Event):Void 
 	{
 		hero.showNormal();
-		this.addEventListener(Event.ENTER_FRAME, update);		
+		this.addEventListener(Event.ENTER_FRAME, update);
+		if (this.level == 1) onClickStage();
 	}
 	
 	private function pause(e:Event):Void 
@@ -84,7 +124,10 @@ class Game extends Sprite
 	}
 	
 	private function onClickTile(e:MouseEvent):Void {
-		if (skillSelection.getSelectedSkill() != null) e.currentTarget.setSkillIcon(skillSelection.getSelectedSkill().getType());
+		if (skillSelection.getSelectedSkill() != null) {
+			e.currentTarget.setSkillIcon(skillSelection.getSelectedSkill().getType());
+			if (this.level == 1) onClickStage();
+		}
 	}
 	
 	private function update(e:Event):Void {
