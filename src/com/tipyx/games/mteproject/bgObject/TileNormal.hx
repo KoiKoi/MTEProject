@@ -27,38 +27,36 @@ class TileNormal extends Sprite
 	private var collideBox:Shape;
 	private var skill:SkillIcon;
 
-	public function new(_type:Int = 1) 
+	public function new(_type:Int = 0) 
 	{
 		super ();
 		
 		this.type = _type;
 		
+		this.doubleClickEnabled = true;
+		this.mouseChildren = false;
+		
 		var arSpritesheetFrame:Array<SpritesheetFrame> = [];
 		
-		switch (type) 
-		{
-			case 0: for (i in 0...2) arSpritesheetFrame.push(new SpritesheetFrame(32 * i, 0, 32, 40, 0, -8));
-			
-			case 2: for (i in 0...2) arSpritesheetFrame.push(new SpritesheetFrame(32 * (i + 2), 0, 32, 40, 0, -8));
-			
-			case 4: for (i in 0...2) arSpritesheetFrame.push(new SpritesheetFrame(32 * (i + 4), 0, 32, 40, 0, -8));
-				
-			default:
-				
-		}
+		if (type < 6) for (i in 0...2) arSpritesheetFrame.push(new SpritesheetFrame(32 * (i + this.type), 0, 32, 30, 0, -8));
+		else if (type < 10) for (i in 0...2) arSpritesheetFrame.push(new SpritesheetFrame(32 * (i + this.type), 0, 32, 40, 0, -8));
+		else arSpritesheetFrame.push(new SpritesheetFrame(32 * this.type, 8, 32, 32, 0, 0));
 		
 		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGround.png"), arSpritesheetFrame);
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGroundV2.png"), arSpritesheetFrame);
+		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGroundV2.png"), arSpritesheetFrame);
+		spritesheet = new Spritesheet(Assets.getBitmapData ("img/tileGroundV2-Demi.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
-		anim.spritesheet.addBehavior(new BehaviorData("normal", [0, 1, 0, 1, 0], true, 2));
-		anim.showBehavior("normal");
+		if ( type < 10) anim.spritesheet.addBehavior(new BehaviorData("normal", [0, 1, 0, 1, 0], true, 2));
+		else anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
+		anim.showBehavior("normal"); 
 		addChild(anim);
 		
 		previousTime = Lib.getTimer ();
 		
 		collideBox = new Shape();
 		collideBox.graphics.beginFill(0xFFFFFF);
-		collideBox.graphics.drawRect(0, 0, 32, 32);
+		if (type < 6) collideBox.graphics.drawRect(0, 0, 32, 22);
+		else collideBox.graphics.drawRect(0, 0, 32, 32);
 		collideBox.alpha = 0;
 		addChild(collideBox);
 		
@@ -104,6 +102,13 @@ class TileNormal extends Sprite
 		return false;
 	}
 	
+	public function removeSkillIcon() {
+		if (skill != null) {
+			removeChild(skill);
+			skill = null;			
+		}
+	}
+	
 	public function setSkillIcon(_type:Int) {
 		if (skill != null) {
 			removeChild(skill);
@@ -117,6 +122,14 @@ class TileNormal extends Sprite
 	public function getSkillType():Int {
 		if (skill != null) return skill.getType();
 		else return -1;
+	}
+	
+	public function getWidth():Float {
+		return this.collideBox.width;
+	}
+	
+	public function getHeight():Float {
+		return this.collideBox.height;
 	}
 	
 }

@@ -34,11 +34,10 @@ class SkillSelect extends Sprite
 		//var bitmapData:BitmapData = Assets.getBitmapData("img/bg_skillSelect.png");
 		var bitmapData:BitmapData = Assets.getBitmapData("img/bg_skillSelectV2.png");
 		var bitmap:Bitmap = new Bitmap(bitmapData);
-		
 		addChild(bitmap);
 		
 		for (i in 0...6) {
-			if (ConfigLevels.AR_SKILLZ_ALLOWED[this.level - 1][i]) {
+			if (ConfigLevels.AR_NUM_SKILLZ_ALLOWED[this.level - 1][i] != 0) {
 				var skill:SkillIcon = new SkillIcon(i);
 				skill.x = 100 + (i * 60);
 				skill.y = 7;
@@ -51,24 +50,14 @@ class SkillSelect extends Sprite
 		playButton = new BtnIG(0);
 		playButton.name = "playButton";
 		playButton.x = 600;
-		playButton.y = 7;
+		playButton.y = 23;
 		playButton.addEventListener(MouseEvent.CLICK, onClickButton);
-		
-		//var pauseButton:BtnIG = new BtnIG(1);
-		//pauseButton.name = "pauseButton";
-		//pauseButton.x = 660;
-		//pauseButton.y = 7;
-		//pauseButton.addEventListener(MouseEvent.CLICK, onClickButton);
 		
 		stopButton = new BtnIG(2);
 		stopButton.name = "stopButton";
 		stopButton.x = 720;
-		stopButton.y = 7;
+		stopButton.y = 23;
 		stopButton.addEventListener(MouseEvent.CLICK, onClickButton);
-		
-		//addChild(playButton);
-		//addChild(pauseButton);
-		//addChild(stopButton);
 	}
 	
 	private function onClickButton(e:MouseEvent):Void {

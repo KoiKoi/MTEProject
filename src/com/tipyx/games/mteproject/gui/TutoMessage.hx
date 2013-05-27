@@ -50,6 +50,12 @@ class TutoMessage extends Sprite
 			case 7: arSpritesheetFrame.push(new SpritesheetFrame(329, 231, 329, 77));
 			
 			case 8: arSpritesheetFrame.push(new SpritesheetFrame(0, 308, 329, 77));
+			
+			case 9: arSpritesheetFrame.push(new SpritesheetFrame(329, 308, 329, 77));
+			
+			case 10: arSpritesheetFrame.push(new SpritesheetFrame(0, 385, 329, 77));
+			
+			case 11: arSpritesheetFrame.push(new SpritesheetFrame(329, 385, 329, 77));
 				
 			default:
 				

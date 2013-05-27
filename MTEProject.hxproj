@@ -52,15 +52,30 @@
     <asset path="assets\img\skill_icon.png" bitmap="False" />
     <asset path="assets\img\btn_IG.png" bitmap="False" />
     <asset path="assets\img\btn_home.png" bitmap="False" update="..\Pyxel_raw\export\btn_home.png" />
-    <asset path="assets\img\tileGroundV2.png" bitmap="False" />
+    <asset path="assets\img\tileGroundV2.png" bitmap="False" update="..\Pyxel_raw\export\tileGroundV2.png" />
     <asset path="assets\img\bg_skillSelectV2.png" bitmap="False" />
     <asset path="assets\img\btn_homeV2.png" bitmap="False" update="..\Pyxel_raw\export\btn_homeV2.png" />
     <asset path="assets\img\btn_IGV2.png" bitmap="False" update="..\Pyxel_raw\export\btn_IGV2.png" />
     <asset path="assets\img\heroV2.png" bitmap="False" update="..\Pyxel_raw\export\heroV2.png" />
     <asset path="assets\img\skill_iconV2.png" bitmap="False" update="..\Pyxel_raw\export\skill_iconV2.png" />
     <asset path="assets\img\btn_IGV2.png" bitmap="False" />
-    <asset path="assets\img\tutoMessage.png" bitmap="False" update="..\Assets\tuto.png" />
     <asset path="assets\img\clickContinueButton.png" bitmap="False" update="..\Assets\clickContinueButton.png" />
+    <asset path="assets\img\sign.png" bitmap="False" update="..\Assets\sign.png" />
+    <asset path="assets\img\sign.png" bitmap="False" />
+    <asset path="assets\img\sign.png" bitmap="False" />
+    <asset path="assets\img\tileGroundV2.png" bitmap="False" />
+    <asset path="assets\img\title.png" bitmap="False" />
+    <asset path="assets\img\mob1.png" bitmap="False" update="..\Pyxel_raw\export\mob1.png" />
+    <asset path="assets\img\tutoMessage.png" bitmap="False" />
+    <asset path="assets\img\heroV3.png" bitmap="False" update="..\Assets\heroV3.png" />
+    <asset path="assets\img\tileGroundV2-Demi.png" bitmap="False" update="..\Assets\tileGroundV2-Demi.png" />
+    <asset path="assets\img\heroV3.png" bitmap="False" />
+    <asset path="assets\img\heroV3.png" bitmap="False" />
+    <asset path="assets\img\heroV3.png" bitmap="False" />
+    <asset path="assets\img\heroV3.png" bitmap="False" />
+    <asset path="assets\img\storyScreen.png" bitmap="False" update="..\Assets\storyScreen.png" />
+    <asset path="assets\img\btn_levels.png" bitmap="False" update="..\Assets\badgeLevel.png" />
+    <asset path="assets\img\selectLevel.png" bitmap="False" update="..\Assets\selectLevel.png" />
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

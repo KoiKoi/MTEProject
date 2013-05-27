@@ -29,7 +29,6 @@ class SkillIcon extends Sprite
 		var arSpritesheetFrame:Array<SpritesheetFrame> = [];
 		arSpritesheetFrame.push(new SpritesheetFrame(32 * type, 0, 32, 32));
 		
-		//arSpritesheetFrame.push(new SpritesheetFrame(11, 7, 16, 57, -2, -57));
 		
 		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_icon.png"), arSpritesheetFrame);
 		spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_iconV2.png"), arSpritesheetFrame);
