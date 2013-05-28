@@ -62,6 +62,8 @@ class AssetData {
 			type.set ("img/storyScreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/tileGround.png", nme.NME_img_tileground_png);
 			type.set ("img/tileGround.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/tileGround2.png", nme.NME_img_tileground2_png);
+			type.set ("img/tileGround2.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/tileGroundV2-Demi.png", nme.NME_img_tilegroundv2_demi_png);
 			type.set ("img/tileGroundV2-Demi.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/tileGroundV2.png", nme.NME_img_tilegroundv2_png);
@@ -104,6 +106,7 @@ class NME_img_skill_icon_png extends nme.display.BitmapData { public function ne
 class NME_img_skill_iconv2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_storyscreen_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_tileground_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_tileground2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_tilegroundv2_demi_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_tilegroundv2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_title_png extends nme.display.BitmapData { public function new () { super (0, 0); } }

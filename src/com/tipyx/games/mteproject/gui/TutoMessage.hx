@@ -31,46 +31,21 @@ class TutoMessage extends Sprite
 		this.buttonMode = true;
 		
 		var arSpritesheetFrame:Array<SpritesheetFrame> = [];
-		switch (this.type) 
-		{
-			case 0: arSpritesheetFrame.push(new SpritesheetFrame(0, 0, 329, 77));
-			
-			case 1: arSpritesheetFrame.push(new SpritesheetFrame(329, 0, 329, 77));
-			
-			case 2: arSpritesheetFrame.push(new SpritesheetFrame(0, 77, 329, 77));
-			
-			case 3: arSpritesheetFrame.push(new SpritesheetFrame(329, 77, 329, 77));
-			
-			case 4: arSpritesheetFrame.push(new SpritesheetFrame(0, 154, 329, 77));
-			
-			case 5: arSpritesheetFrame.push(new SpritesheetFrame(329, 154, 329, 77));
-			
-			case 6: arSpritesheetFrame.push(new SpritesheetFrame(0, 231, 329, 77));
-			
-			case 7: arSpritesheetFrame.push(new SpritesheetFrame(329, 231, 329, 77));
-			
-			case 8: arSpritesheetFrame.push(new SpritesheetFrame(0, 308, 329, 77));
-			
-			case 9: arSpritesheetFrame.push(new SpritesheetFrame(329, 308, 329, 77));
-			
-			case 10: arSpritesheetFrame.push(new SpritesheetFrame(0, 385, 329, 77));
-			
-			case 11: arSpritesheetFrame.push(new SpritesheetFrame(329, 385, 329, 77));
-				
-			default:
-				
-		}
+		
+		if (this.type % 2 == 0) arSpritesheetFrame.push(new SpritesheetFrame(0, 77 * Std.int(this.type / 2), 329, 77));
+		else arSpritesheetFrame.push(new SpritesheetFrame(329, 77 * Std.int(this.type / 2), 329, 77));
+		
+		spritesheet = new Spritesheet(Assets.getBitmapData("img/tutoMessage.png"), arSpritesheetFrame);
+		anim = new AnimatedSprite(spritesheet);
+		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
+		anim.showBehavior("normal");
+		addChild(anim);
 		
 		var clickToContinueBD:BitmapData = Assets.getBitmapData("img/clickContinueButton.png");
 		var clickToContinue:Bitmap = new Bitmap(clickToContinueBD);
 		clickToContinue.x = 82;
 		clickToContinue.y = 65;
 		
-		spritesheet = new Spritesheet(Assets.getBitmapData ("img/tutoMessage.png"), arSpritesheetFrame);
-		anim = new AnimatedSprite(spritesheet);
-		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
-		anim.showBehavior("normal");
-		addChild(anim);
 		addChild(clickToContinue);
 	}
 	

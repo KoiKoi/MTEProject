@@ -30,14 +30,11 @@ class SkillIcon extends Sprite
 		arSpritesheetFrame.push(new SpritesheetFrame(32 * type, 0, 32, 32));
 		
 		
-		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_icon.png"), arSpritesheetFrame);
 		spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_iconV2.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
 		anim.showBehavior("normal");
 		addChild(anim);
-		
-		//anim.update(10);
 	}
 	
 	public function getType():Int {

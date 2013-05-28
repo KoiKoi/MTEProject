@@ -17,7 +17,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="C:\Development\Haxe\haxe\lib\nme/3,5,6/" />
+    <class path="C:\Development\Haxe\haxe/lib\nme/3,5,6/" />
     <class path="bin/flash/haxe" />
   </classpaths>
   <!-- Build options -->

@@ -20,7 +20,6 @@ class BossEnvironment extends Sprite
 	private var arChain:Array<Bitmap>;
 	private var step:Int = 2;
 	private var jail:Bitmap;
-	private var boss:Bitmap;
 	
 	public function new() 
 	{
@@ -29,7 +28,7 @@ class BossEnvironment extends Sprite
 		arChain = [];
 		
 		var bossBD:BitmapData = Assets.getBitmapData("img/boss.png");
-		boss = new Bitmap(bossBD);
+		var boss:Bitmap = new Bitmap(bossBD);
 		boss.x = 181;
 		boss.y = 50;
 		addChild(boss);

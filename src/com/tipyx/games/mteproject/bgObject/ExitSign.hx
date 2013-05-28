@@ -11,7 +11,6 @@ import nme.Assets;
  */
 class ExitSign extends Sprite
 {
-
 	public function new() 
 	{
 		super();
@@ -23,5 +22,4 @@ class ExitSign extends Sprite
 		exitSign.y = -exitSign.height;
 		addChild(exitSign);
 	}
-	
 }

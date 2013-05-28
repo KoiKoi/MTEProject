@@ -35,7 +35,6 @@ class Hero extends Sprite
 	{
 		super ();
 		
-		//this.scaleX = this.scaleY = 2;
 		
 		var arSpritesheetFrame:Array<SpritesheetFrame> = [];
 		

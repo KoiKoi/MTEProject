@@ -22,15 +22,6 @@ class Mob extends Sprite
 	private var anim:AnimatedSprite;
 	private var spritesheet:Spritesheet;
 	private var collideBox:Shape;
-	
-	/*
-	 * Skill Type :  
-	 * 0 : Jump
-	 * 1 : Left
-	 * 2 : Right
-	 * 3 : Jump Left
-	 * 4 : Jump Right
-	 */
 
 	public function new() 
 	{
@@ -38,9 +29,11 @@ class Mob extends Sprite
 		
 		var arSpritesheetFrame:Array<SpritesheetFrame> = [];
 		
+		// Left
 		arSpritesheetFrame.push(new SpritesheetFrame(1, 3, 30, 29, 0, -29));
 		arSpritesheetFrame.push(new SpritesheetFrame(34, 3, 30, 29, 0, -29));
 		
+		// Right
 		arSpritesheetFrame.push(new SpritesheetFrame(97, 3, 30, 29, 0, -29));
 		arSpritesheetFrame.push(new SpritesheetFrame(65, 3, 30, 29, 0, -29));
 		
@@ -62,13 +55,13 @@ class Mob extends Sprite
 		previousTime = currentTime;
 	}
 	
-	public function goLeft() {
+	public function goLeft():Void {
 		this.direction = "left";
 		anim.showBehavior("normalLeft");
 		update();
 	}
 	
-	public function goRight() {
+	public function goRight():Void {
 		this.direction = "right";
 		anim.showBehavior("normalRight");
 		update();

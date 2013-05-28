@@ -226,20 +226,6 @@ class ConfigLevels
 		[760,448]
 	];
 	
-	public static var AR_POSITION_INIT_HERO:Array<Array<Float>> =
-	[
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448],
-		[10,448]
-	];
-	
 	public static var AR_MOBS_INIT:Array<Array<Float>> = 
 	[
 		[0],

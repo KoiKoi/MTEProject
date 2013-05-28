@@ -10,7 +10,6 @@ import nme.display.Sprite;
  */
 class Tuto extends Sprite
 {
-	private var arPositionMessage:Array<Array<Float>>;
 	private var arTutoMessage:Array<TutoMessage>;
 	private var step:Int = 0;
 	private var level:Int;
@@ -23,7 +22,7 @@ class Tuto extends Sprite
 		arTutoMessage = [];
 		
 		if (this.level == 1) {
-			arPositionMessage = [[235,175],[450,300],[235,175],[70,60],[70,60],[450,60],[235,175],[450,60],[235,175]];
+			var arPositionMessage:Array<Array<Float>> = [[235,175],[450,300],[235,175],[70,60],[70,60],[450,60],[235,175],[450,60],[235,175]];
 			
 			for (i in 0...9) {
 				var tutoMessage:TutoMessage = new TutoMessage(i);
@@ -40,7 +39,6 @@ class Tuto extends Sprite
 				arTutoMessage.push(tutoMessage);
 			}
 		}
-		
 		
 		addChild(arTutoMessage[0]);
 	}

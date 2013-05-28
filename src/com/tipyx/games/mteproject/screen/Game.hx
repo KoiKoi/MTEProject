@@ -1,6 +1,6 @@
 package com.tipyx.games.mteproject.screen;
 
-import com.tipyx.games.mteproject.bgObject.TileNormal;
+import com.tipyx.games.mteproject.bgObject.Tile;
 import com.tipyx.games.mteproject.bgObject.ExitSign;
 import com.tipyx.games.mteproject.ConfigLevels;
 import com.tipyx.games.mteproject.gameObject.BossEnvironment;
@@ -29,13 +29,14 @@ using Lambda;
  * ...
  * @author Tipyx
  */
+
 class Game extends Sprite
 {
 	private var input:Input;
 	private var hero:Hero;
 	private var skillSelection:SkillSelect;
 	
-	private var arTiles:Array<TileNormal>;
+	private var arTiles:Array<Tile>;
 	private var arSizeLevel:Array<Int>;
 	private var arMobs:Array<Mob>;
 	private var speedJump:Float = 0;
@@ -69,7 +70,7 @@ class Game extends Sprite
 		for (i in 0...arSizeLevel[0]) {
 			for (j in  0...arSizeLevel[1]) {
 				if (ConfigLevels.AR_LEVELS_TILES[this.level - 1][actualBlocSelected] != -1) {
-					var tile:TileNormal = new TileNormal(ConfigLevels.AR_LEVELS_TILES[this.level - 1][actualBlocSelected]);
+					var tile:Tile = new Tile(ConfigLevels.AR_LEVELS_TILES[this.level - 1][actualBlocSelected]);
 					arTiles.push(tile);
 					tile.x = tile.width * j;
 					tile.y = tile.width * i;
@@ -82,7 +83,7 @@ class Game extends Sprite
 				}
 				actualBlocSelected++;
 			}
-			var tile:TileNormal = new TileNormal(0);
+			var tile:Tile = new Tile(0);
 			arTiles.push(tile);
 			tile.x = -tile.width;
 			tile.y = tile.width * i;
@@ -99,7 +100,6 @@ class Game extends Sprite
 			}
 		}
 		
-		// If Level 1, add Tuto
 		if (this.level == 1 || this.level == 2) {
 			tuto = new Tuto(this.level);
 			tuto.addEventListener("endTuto", endTuto);
@@ -112,8 +112,8 @@ class Game extends Sprite
 		}
 		
 		hero = new Hero();
-		hero.x = ConfigLevels.AR_POSITION_INIT_HERO[this.level - 1][0];
-		hero.y = ConfigLevels.AR_POSITION_INIT_HERO[this.level - 1][1];
+		hero.x = 10;
+		hero.y = 448;
 		addChild(hero);
 		
 		exitSign = new ExitSign();
@@ -180,8 +180,8 @@ class Game extends Sprite
 	
 	private function resetLevel(e:Event = null):Void {
 		hero.showHidden();
-		hero.x = ConfigLevels.AR_POSITION_INIT_HERO[this.level - 1][0];
-		hero.y = ConfigLevels.AR_POSITION_INIT_HERO[this.level - 1][1];
+		hero.x = 10;
+		hero.y = 448;
 		speedJump = 0;
 		for (mob in arMobs) {
 			mob.x = ConfigLevels.AR_MOBS_INIT[this.level - 1][1 + (2 * arMobs.indexOf(mob))];
@@ -206,7 +206,6 @@ class Game extends Sprite
 	
 	private function update(e:Event):Void {
 		// Movement
-		
 		if (speedJump >= 0) {
 			if (getTileUnder(hero) != null) {
 				switch (getTileUnder(hero).getSkillType()) 
@@ -276,7 +275,7 @@ class Game extends Sprite
 			dispatchEvent(new Event("nextLevel"));
 		}
 		
-		if (goLeft || input.left) {
+		if (goLeft) {
 			if (getTileLeft(hero) == null) {
 				hero.x -= Settings.SPEED_X_MAX;
 				hero.showWalk(true);
@@ -292,7 +291,7 @@ class Game extends Sprite
 				}
 			}
 		}
-		else if (goRight || input.right) {
+		else if (goRight) {
 			if (getTileRight(hero) == null) {
 				hero.x += Settings.SPEED_X_MAX;
 				hero.showWalk();
@@ -323,7 +322,7 @@ class Game extends Sprite
 		
 		// Collision 
 		for (mob in arMobs) if (mob.hitTestObject(hero)) resetLevel();
-		if (hero.hitTestObject(bossEnvironment.getJail())) {
+		if (bossEnvironment != null && hero.hitTestObject(bossEnvironment.getJail())) {
 			bossEnvironment.nextStep();
 			this.removeEventListener(Event.ENTER_FRAME, update);
 			if (this.stepBoss == 0) {
@@ -355,7 +354,7 @@ class Game extends Sprite
 			for (i in 0...arSizeLevel[0]) {
 				for (j in  0...arSizeLevel[1]) {
 					if (ConfigLevels.AR_LEVELS_TILES[this.level + this.stepBoss][actualBlocSelected] != -1) {
-						var tile:TileNormal = new TileNormal(ConfigLevels.AR_LEVELS_TILES[this.level + this.stepBoss][actualBlocSelected]);
+						var tile:Tile = new Tile(ConfigLevels.AR_LEVELS_TILES[this.level + this.stepBoss][actualBlocSelected]);
 						arTiles.push(tile);
 						tile.x = tile.width * j;
 						tile.y = tile.width * i;
@@ -366,7 +365,7 @@ class Game extends Sprite
 					}
 					actualBlocSelected++;
 				}
-				var tile:TileNormal = new TileNormal(0);
+				var tile:Tile = new Tile(0);
 				arTiles.push(tile);
 				tile.x = -tile.width;
 				tile.y = tile.width * i;
@@ -388,28 +387,28 @@ class Game extends Sprite
 		Actuate.tween(this, 0.05, { y:0 } ).onComplete(animEndGame);
 	}
 	
-	private function getTileUnder(_object:Dynamic):TileNormal {
+	private function getTileUnder(_object:Dynamic):Tile {
 		for (tile in arTiles) {
 			if (tile.collideY(_object.x, _object.y + speedJump, _object.width)) return tile;
 		}
 		return null;
 	}
 	
-	private function getTileAbove(_object:Dynamic):TileNormal {
+	private function getTileAbove(_object:Dynamic):Tile {
 		for (tile in arTiles) {
 			if (tile.collideY(_object.x, _object.y + speedJump - _object.height, _object.width)) return tile;
 		}
 		return null;
 	}
 	
-	private function getTileRight(_object:Dynamic):TileNormal {
+	private function getTileRight(_object:Dynamic):Tile {
 		for (tile in arTiles) {
 			if (tile.collideX(_object.x + _object.width + Settings.SPEED_X_MAX, _object.y, _object.height)) return tile;
 		}
 		return null;
 	}
 	
-	private function getTileLeft(_object:Dynamic):TileNormal {
+	private function getTileLeft(_object:Dynamic):Tile {
 		for (tile in arTiles) {
 			if (tile.collideX(_object.x - Settings.SPEED_X_MAX, _object.y, _object.height)) return tile;
 		}

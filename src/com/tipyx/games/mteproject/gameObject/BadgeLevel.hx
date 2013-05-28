@@ -13,7 +13,7 @@ import nme.Lib;
  * ...
  * @author Tipyx
  */
-class BadgeLevels extends Sprite
+class BadgeLevel extends Sprite
 {
 	private var num:Int;
 	private var previousTime:Int;
@@ -31,14 +31,11 @@ class BadgeLevels extends Sprite
 		else arSpritesheetFrame.push(new SpritesheetFrame(78 * (this.num - 5), 78, 78, 78));
 		
 		
-		//spritesheet = new Spritesheet(Assets.getBitmapData ("img/skill_icon.png"), arSpritesheetFrame);
 		spritesheet = new Spritesheet(Assets.getBitmapData ("img/btn_levels.png"), arSpritesheetFrame);
 		anim = new AnimatedSprite(spritesheet);
 		anim.spritesheet.addBehavior(new BehaviorData("normal", [0], true, 2));
 		anim.showBehavior("normal");
 		addChild(anim);
-		
-		//anim.update(10);
 	}
 	
 	public function getNum():Int {

@@ -54,18 +54,16 @@ class Main extends Sprite
 		addChild(maskObject);
 		this.mask = maskObject;
 		
-		//gotoHomePage();
-		
 		changeScreen("home");
 	}
 		
-	public function changeScreen(_newScreen:String, _level:Int = 1):Void {
+	public function changeScreen(_newScreen:String):Void {
 		addChild(blackScreenFade);
-		Actuate.tween(blackScreenFade, 0.5, { alpha : 1 }).onComplete(removeBlackScreen, [_newScreen, _level]);
+		Actuate.tween(blackScreenFade, 0.5, { alpha : 1 }).onComplete(removeBlackScreen, [_newScreen]);
 	}
 	
-	private function removeBlackScreen(_newScreen:String, _level:Int):Void { 
-		changePage(_newScreen, _level);
+	private function removeBlackScreen(_newScreen:String):Void { 
+		changePage(_newScreen);
 		Actuate.tween(blackScreenFade, 0.5, { alpha : 0 }).onComplete(endAnim);
 	}
 	
@@ -73,7 +71,7 @@ class Main extends Sprite
 		removeChild(blackScreenFade);
 	}
 	
-	private function changePage(newScreen:String, _level:Int):Void {
+	private function changePage(newScreen:String):Void {
 		// Remove old Screen
 		if (home != null) {
 			home.removeEventListener("playButtonClicked", gotoStoryScreen);
@@ -111,7 +109,7 @@ class Main extends Sprite
 			addChild(home);
 		}
 		else if (newScreen == "game") {
-			game = new Game(_level);
+			game = new Game(Settings.NEXT_LEVEL);
 			setCookie();
 			game.addEventListener("nextLevel", gotoGameScreen);
 			game.addEventListener("gotoEndScreen", gotoEndScreen);
@@ -153,7 +151,7 @@ class Main extends Sprite
 	}
 	
 	private function gotoGameScreen(e:Event = null) {
-		changeScreen("game", Settings.NEXT_LEVEL);	
+		changeScreen("game");	
 	}
 	
 	public function setCookie():Void {

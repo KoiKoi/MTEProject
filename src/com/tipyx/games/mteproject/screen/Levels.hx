@@ -27,14 +27,14 @@ class Levels extends Sprite
 		addChild(title);
 		
 		for (i in 0...10) {
-			var btn_level:BadgeLevels = new BadgeLevels(i);
+			var btn_level:BadgeLevel = new BadgeLevel(i);
 			if (i < 5) {
 				btn_level.x = i * 135 + 100;
 				btn_level.y = 100;
 			}
 			else {
-				btn_level.y = 250;
 				btn_level.x = (i - 5) * 135 + 100;
+				btn_level.y = 250;
 			}
 			if (i > 0 && !Settings.AR_LEVELS_FINISHED[i - 1]) btn_level.alpha = 0.5;
 			else btn_level.addEventListener(MouseEvent.CLICK, onClickBtn);

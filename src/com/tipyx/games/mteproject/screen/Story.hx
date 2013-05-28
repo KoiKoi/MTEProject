@@ -15,19 +15,17 @@ import nme.Assets;
 class Story extends Sprite
 {
 
-	public function new() 
-	{
+	public function new() {
 		super ();
+		
 		var storyBD:BitmapData = Assets.getBitmapData("img/storyScreen.png");
 		var story:Bitmap = new Bitmap(storyBD);
-		
 		addChild(story);
 		
 		this.addEventListener(MouseEvent.CLICK, onClick);
 	}
 	
-	private function onClick(e:MouseEvent):Void 
-	{
+	private function onClick(e:MouseEvent):Void {
 		Settings.NEXT_LEVEL = 1;
 		dispatchEvent(new Event("gotoLevel1"));
 	}

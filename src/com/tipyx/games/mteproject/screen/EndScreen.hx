@@ -15,19 +15,17 @@ import nme.Assets;
 class EndScreen extends Sprite
 {
 
-	public function new() 
-	{
+	public function new() {
 		super ();
+		
 		var endScreenBD:BitmapData = Assets.getBitmapData("img/EndScreen.png");
 		var endScreen:Bitmap = new Bitmap(endScreenBD);
-		
 		addChild(endScreen);
 		
 		this.addEventListener(MouseEvent.CLICK, onClick);
 	}
 	
-	private function onClick(e:MouseEvent):Void 
-	{
+	private function onClick(e:MouseEvent):Void {
 		Settings.NEXT_LEVEL = 1;
 		dispatchEvent(new Event("gotoHome"));
 	}
