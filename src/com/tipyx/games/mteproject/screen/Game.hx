@@ -3,10 +3,12 @@ package com.tipyx.games.mteproject.screen;
 import com.tipyx.games.mteproject.bgObject.TileNormal;
 import com.tipyx.games.mteproject.bgObject.ExitSign;
 import com.tipyx.games.mteproject.ConfigLevels;
+import com.tipyx.games.mteproject.gameObject.BossEnvironment;
 import com.tipyx.games.mteproject.gameObject.Hero;
 import com.tipyx.games.mteproject.gameObject.Mob;
 import com.tipyx.games.mteproject.gameObject.SkillIcon;
 import com.tipyx.games.mteproject.gameObject.SkillSelect;
+import com.tipyx.games.mteproject.gui.FadeWhiteScreen;
 import com.tipyx.games.mteproject.gui.Tuto;
 import com.tipyx.games.mteproject.Input;
 import com.tipyx.games.mteproject.Settings;
@@ -37,12 +39,15 @@ class Game extends Sprite
 	private var arSizeLevel:Array<Int>;
 	private var arMobs:Array<Mob>;
 	private var speedJump:Float = 0;
+	private var stepBoss:Int = 0;
 	private var jumpEnable:Bool = false;
 	private var goLeft:Bool = false;
 	private var goRight:Bool = false;
 	private var level:Int;
 	private var tuto:Tuto;
 	private var exitSign:ExitSign;
+	private var bossEnvironment:BossEnvironment;
+	private var fadeWhiteScreen:FadeWhiteScreen;
 
 	public function new(_level:Int) 
 	{
@@ -101,6 +106,10 @@ class Game extends Sprite
 			addChild(tuto);			
 			Lib.current.stage.addEventListener(MouseEvent.CLICK, onClickStage);
 		}
+		else if (this.level == 10) {
+			bossEnvironment = new BossEnvironment();
+			addChild(bossEnvironment);
+		}
 		
 		hero = new Hero();
 		hero.x = ConfigLevels.AR_POSITION_INIT_HERO[this.level - 1][0];
@@ -110,7 +119,7 @@ class Game extends Sprite
 		exitSign = new ExitSign();
 		exitSign.x = ConfigLevels.AR_POSITION_EXIT_SIGN[this.level - 1][0];
 		exitSign.y = ConfigLevels.AR_POSITION_EXIT_SIGN[this.level - 1][1];
-		addChild(exitSign);
+		if (this.level != 10) addChild(exitSign);			
 		
 		skillSelection = new SkillSelect(this.level);
 		if (this.level == 1 || this.level == 2) {
@@ -123,8 +132,6 @@ class Game extends Sprite
 			skillSelection.addEventListener("stopButtonClicked", resetLevel);			
 		}
 		addChild(skillSelection);
-		
-		
 	}
 	
 	private function onClickStage(e:MouseEvent = null):Void {
@@ -193,7 +200,6 @@ class Game extends Sprite
 	private function onClickTile(e:MouseEvent):Void {
 		if (skillSelection.getSelectedSkill() != null) {
 			e.currentTarget.setSkillIcon(skillSelection.getSelectedSkill().getType());
-			Lib.trace(arTiles.indexOf(e.currentTarget));
 			if (this.level == 1 && tuto.getStep() == 4 && arTiles.indexOf(e.currentTarget) == 14) onClickStage();
 		}
 	}
@@ -305,7 +311,6 @@ class Game extends Sprite
 		else hero.showNormal();
 		
 		for (mob in arMobs) {
-			if (mob.hitTestObject(hero)) resetLevel();
 			if (mob.getDirection() == "left") {
 				if (getTileLeft(mob) == null) mob.x -= 4;
 				else mob.goRight();
@@ -316,10 +321,71 @@ class Game extends Sprite
 			}
 		}
 		
+		// Collision 
+		for (mob in arMobs) if (mob.hitTestObject(hero)) resetLevel();
+		if (hero.hitTestObject(bossEnvironment.getJail())) {
+			bossEnvironment.nextStep();
+			this.removeEventListener(Event.ENTER_FRAME, update);
+			if (this.stepBoss == 0) {
+				fadeWhiteScreen = new FadeWhiteScreen(1);
+			}
+			else {
+				fadeWhiteScreen = new FadeWhiteScreen(4);
+				animEndGame();
+			}
+			fadeWhiteScreen.addEventListener("animAddEnd", gotoNextStepBossLevel);
+			addChild(fadeWhiteScreen);
+		}
+		
 		// Animation
 		for (tile in arTiles) tile.update();
 		for (mob in arMobs) mob.update();
 		hero.update();
+	}
+	
+	private function gotoNextStepBossLevel(e:Event):Void {
+		if (stepBoss != 1) {
+			resetLevel();
+			
+			for (tile in arTiles) removeChild(tile);
+			
+			arTiles = [];
+			
+			var actualBlocSelected:Int = 0;
+			for (i in 0...arSizeLevel[0]) {
+				for (j in  0...arSizeLevel[1]) {
+					if (ConfigLevels.AR_LEVELS_TILES[this.level + this.stepBoss][actualBlocSelected] != -1) {
+						var tile:TileNormal = new TileNormal(ConfigLevels.AR_LEVELS_TILES[this.level + this.stepBoss][actualBlocSelected]);
+						arTiles.push(tile);
+						tile.x = tile.width * j;
+						tile.y = tile.width * i;
+						tile.enableRollOver();
+						tile.addEventListener(MouseEvent.CLICK, onClickTile);
+						tile.addEventListener(MouseEvent.DOUBLE_CLICK, onDoubleClickTile);
+						addChild(tile);
+					}
+					actualBlocSelected++;
+				}
+				var tile:TileNormal = new TileNormal(0);
+				arTiles.push(tile);
+				tile.x = -tile.width;
+				tile.y = tile.width * i;
+				addChild(tile);
+			}
+			
+			fadeWhiteScreen.removeScreen();
+			
+			stepBoss++;			
+		}
+		else dispatchEvent(new Event("gotoEndScreen"));
+	}
+	
+	private function animEndGame():Void {
+		Actuate.tween(this, 0.05, { y:-5 } ).onComplete(animEndGame2);
+	}
+	
+	private function animEndGame2():Void {
+		Actuate.tween(this, 0.05, { y:0 } ).onComplete(animEndGame);
 	}
 	
 	private function getTileUnder(_object:Dynamic):TileNormal {

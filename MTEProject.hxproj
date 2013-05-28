@@ -76,6 +76,10 @@
     <asset path="assets\img\storyScreen.png" bitmap="False" update="..\Assets\storyScreen.png" />
     <asset path="assets\img\btn_levels.png" bitmap="False" update="..\Assets\badgeLevel.png" />
     <asset path="assets\img\selectLevel.png" bitmap="False" update="..\Assets\selectLevel.png" />
+    <asset path="assets\img\boss.png" bitmap="False" update="..\Assets\boss.png" />
+    <asset path="assets\img\chain.png" bitmap="False" update="..\Assets\chain.png" />
+    <asset path="assets\img\jail.png" bitmap="False" update="..\Assets\jail.png" />
+    <asset path="assets\img\EndScreen.png" bitmap="False" update="..\Assets\EndScreen.png" />
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

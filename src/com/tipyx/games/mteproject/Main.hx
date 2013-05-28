@@ -1,6 +1,7 @@
 package com.tipyx.games.mteproject;
 
 import com.tipyx.games.mteproject.gui.FadeBlackScreen;
+import com.tipyx.games.mteproject.screen.EndScreen;
 import com.tipyx.games.mteproject.screen.Game;
 import com.tipyx.games.mteproject.screen.Home;
 import com.tipyx.games.mteproject.screen.Levels;
@@ -23,6 +24,7 @@ class Main extends Sprite
 	private var home:Home;
 	private var game:Game;
 	private var story:Story;
+	private var endScreen:EndScreen;
 	private var levels:Levels;
 	
 	var inited:Bool;
@@ -76,19 +78,24 @@ class Main extends Sprite
 		if (home != null) {
 			home.removeEventListener("playButtonClicked", gotoStoryScreen);
 			home.removeEventListener("continueButtonClicked", gotoLevelsScreen);
-			//home.removeEventListener("optionsButtonClicked", gotoGamePage);
 			removeChild(home);
 			home = null;
 		}
 		else if (game != null) {
 			removeChild(game);
 			game.removeEventListener("nextLevel", gotoGameScreen);
+			game.removeEventListener("gotoEndScreen", gotoEndScreen);
 			game = null;
 		}
 		else if (story != null) {
 			removeChild(story);
 			story.removeEventListener("gotoLevel1", gotoGameScreen);
 			story = null;
+		}
+		else if (endScreen != null) {
+			removeChild(endScreen);
+			endScreen.removeEventListener("gotoHome", gotoHomeScreen);
+			endScreen = null;
 		}
 		else if (levels != null) {
 			removeChild(levels);
@@ -101,20 +108,24 @@ class Main extends Sprite
 			home = new Home();
 			home.addEventListener("playButtonClicked", gotoStoryScreen);
 			home.addEventListener("continueButtonClicked", gotoLevelsScreen);
-			//home.addEventListener("optionsButtonClicked", gotoGamePage);
 			addChild(home);
 		}
 		else if (newScreen == "game") {
 			game = new Game(_level);
 			setCookie();
 			game.addEventListener("nextLevel", gotoGameScreen);
-			//SoundManager.overworld.play();
+			game.addEventListener("gotoEndScreen", gotoEndScreen);
 			addChild(game);
 		}
 		else if (newScreen == "story") {
 			story = new Story();
 			story.addEventListener("gotoLevel1", gotoGameScreen);
 			addChild(story);
+		}
+		else if (newScreen == "endScreen") {
+			endScreen = new EndScreen();
+			endScreen.addEventListener("gotoHome", gotoHomeScreen);
+			addChild(endScreen);
 		}
 		else if (newScreen == "levels") {
 			levels = new Levels();
@@ -125,12 +136,20 @@ class Main extends Sprite
 		this.setChildIndex(blackScreenFade, this.numChildren - 1);
 	}
 	
+	private function gotoHomeScreen(e:Event = null) {
+		changeScreen("home");	
+	}
+	
 	private function gotoLevelsScreen(e:Event = null) {
 		changeScreen("levels");	
 	}
 	
 	private function gotoStoryScreen(e:Event = null) {
 		changeScreen("story");	
+	}
+	
+	private function gotoEndScreen(e:Event = null) {
+		changeScreen("endScreen");	
 	}
 	
 	private function gotoGameScreen(e:Event = null) {

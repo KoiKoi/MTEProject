@@ -52,7 +52,7 @@ class Home extends Sprite
 		
 		addChild(playButton);
 		addChild(continueButton);
-		addChild(optionsButton);
+		//addChild(optionsButton);
 	}
 	
 	private function onClickButton(e:MouseEvent):Void {
