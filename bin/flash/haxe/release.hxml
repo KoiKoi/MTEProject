@@ -2,11 +2,12 @@
 -lib nme
 -lib actuate
 -cp src
--cp C:\Development\Haxe\haxe/lib\nme/3,5,6/
+-cp C:\Development\Haxe\haxe\lib\nme/3,5,6/
 -D nme
 -D nme_ver=3.5.6
 -D nme_install_tool=1
 -D nme3=1
+-D fdb
 -D web
 -swf-version 11
 -swf bin/flash/bin/MTEProject.swf
